@@ -9,7 +9,7 @@ window.geometry('800x500')
 window.resizable(False, False)
 windll.shcore.SetProcessDpiAwareness(1)
 
-photo = tk.PhotoImage(file="images/logo.png")
+photo = tk.PhotoImage(file="../images/logo.png")
 window.iconphoto(True, photo)
 
 window.mainloop()
