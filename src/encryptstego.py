@@ -1,3 +1,6 @@
+# Python GUI program for Image Steganography with encryption - Encryptstego v1.0
+# Created by Subin Gyawali
+
 # Importing required libraries
 from tkinter import *
 from ctypes import windll
