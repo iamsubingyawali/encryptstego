@@ -1,5 +1,6 @@
 # Importing required libraries
 from tkinter import *
+# windll is Windows OS specific, so must be commented before running on other environments
 from ctypes import windll
 from PIL import ImageTk, Image
 
@@ -13,6 +14,7 @@ def open_encode_window():
     # Setting the resizable property of the encode window to false
     encode_window.resizable(False, False)
     # Setting the encode window to be DPI aware for different screens
+    # windll is Windows OS specific, so must be commented before running on other environments
     windll.shcore.SetProcessDpiAwareness(1)
     # Test label
     new_label = Label(encode_window, text="This is encode window")
@@ -28,6 +30,7 @@ def open_decode_window():
     # Setting the resizable property of the decode window to false
     decode_window.resizable(False, False)
     # Setting the decode window to be DPI aware for different screens
+    # windll is Windows OS specific, so must be commented before running on other environments
     windll.shcore.SetProcessDpiAwareness(1)
     # Test label
     new_label = Label(decode_window, text="This is decode window")
@@ -43,6 +46,7 @@ window.geometry('800x500')
 # Setting the resizable property of the window to false
 window.resizable(False, False)
 # Setting the window to be DPI aware for different screens
+# windll is Windows OS specific, so must be commented before running on other environments
 windll.shcore.SetProcessDpiAwareness(1)
 
 # Getting the logo image for displaying on window as well as title
