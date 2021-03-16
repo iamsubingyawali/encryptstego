@@ -5,6 +5,8 @@
 from tkinter import *
 # windll is Windows OS specific, so must be commented before running on other environments
 from ctypes import windll
+from tkinter import filedialog
+
 from PIL import ImageTk, Image
 
 # Defining global variables to track if two child windows for encoding and decoding are in opened or closed state
@@ -12,6 +14,9 @@ encode_opened = False
 decode_opened = False
 
 
+##########################################################
+# ENCODE WINDOW COMPONENTS
+##########################################################
 # function to open a new window for encoding functionality
 def open_encode_window():
     # referencing global variable to reflect modification globally
@@ -38,6 +43,9 @@ def open_encode_window():
         encode_window.protocol("WM_DELETE_WINDOW", lambda: close_encode_window(encode_window))
 
 
+##########################################################
+# DECODE WINDOW COMPONENTS
+##########################################################
 # function to open a new window for decoding functionality
 def open_decode_window():
     # referencing global variable to reflect modification globally
@@ -47,7 +55,7 @@ def open_decode_window():
         # Initializing new child window for decoding functions
         decode_window = Toplevel(window)
         # Setting title of the decode window
-        decode_window.title("Encryptstego - Encode")
+        decode_window.title("Encryptstego - Decode")
         # Setting the size of the decode window
         decode_window.geometry('800x500')
         # Setting the resizable property of the decode window to false
@@ -55,15 +63,44 @@ def open_decode_window():
         # Setting the decode window to be DPI aware for different screens
         # windll is Windows OS specific, so must be commented before running on other environments
         windll.shcore.SetProcessDpiAwareness(1)
-        # Test label
-        new_label = Label(decode_window, text="This is decode window")
-        new_label.pack()
-        # setting the value of global tracking variable to true
+
+        # Label to display image after the image is selected from the file window
+        stego_image_label = Label(decode_window, text="Select Stego Image", height=20, width=50, relief="solid", bg="#FFFFFF")
+        # Placing the label on the window statically
+        stego_image_label.place(x=20, y=20)
+
+        text_to_decode_label = Label(decode_window, text="Decoded Text")
+        text_to_decode_label.config(font=("Open Sans", 12))
+        text_to_decode_label.place(x=400, y=20)
+
+        text_to_decode = Text(decode_window, height=7, width=34)
+        text_to_decode.config(relief="solid", font=("Open Sans", 15), state=DISABLED)
+        text_to_decode.place(x=400, y=51)
+
+        pass_to_decode_label = Label(decode_window, text="Password")
+        pass_to_decode_label.config(font=("Open Sans", 12))
+        pass_to_decode_label.place(x=400, y=262)
+
+        pass_to_decode = Entry(decode_window, width=34)
+        pass_to_decode.config(relief="solid", font=("Open Sans", 15), show="*")
+        pass_to_decode.place(x=400, y=293)
+
+        browse_stego_btn = Button(decode_window, text="Browse Stego Image", width=29)
+        browse_stego_btn.config(font=("Open Sans", 15), bg="#503066", fg="white", borderwidth=0)
+        browse_stego_btn.place(x=20, y=350)
+
+        decode_stego_btn = Button(decode_window, text="Decode", width=15)
+        decode_stego_btn.config(font=("Open Sans", 15), bg="#36923B", fg="white", borderwidth=0)
+        decode_stego_btn.place(x=592, y=420)
+
         decode_opened = True
         # assigning a handler to define the actions when the window is tried to close
         decode_window.protocol("WM_DELETE_WINDOW", lambda: close_decode_window(decode_window))
 
 
+##########################################################
+# MAIN WINDOW COMPONENTS
+##########################################################
 # Function to define actions to be performed when encoding window is tried to closed
 def close_encode_window(encode_window):
     # referencing global variable to reflect modification globally
@@ -72,8 +109,6 @@ def close_encode_window(encode_window):
     encode_window.destroy()
     # Setting the value of global tracking variable to false to denote that window is closed
     encode_opened = False
-    # Test print statement
-    print("Encode Window Closed")
 
 
 # Function to define actions to be performed when decoding window is tried to closed
@@ -84,8 +119,6 @@ def close_decode_window(decode_window):
     decode_window.destroy()
     # Setting the value of global tracking variable to false to denote that window is closed
     decode_opened = False
-    # Test print statement
-    print("Decode Window Closed")
 
 
 # Initializing tkinter window
@@ -141,6 +174,5 @@ decode_btn.pack(side=RIGHT, padx=50)
 footer_label = Label(window, text="Subin Gyawali")
 # Packing the label on the window
 footer_label.pack(side=BOTTOM, pady=20)
-
 # Terminating the execution with mainloop
 window.mainloop()
