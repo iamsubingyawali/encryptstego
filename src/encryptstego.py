@@ -6,6 +6,8 @@ from tkinter import *
 # windll is Windows OS specific, so must be commented before running on other environments
 from ctypes import windll
 from tkinter import filedialog
+import encode
+import decode
 
 from PIL import ImageTk, Image
 
@@ -17,6 +19,8 @@ decode_opened = False
 # To make all the functionalities to work properly,
 # the value of windows must be set to 'False' for other environments than Windows OS
 windows = True
+# Defining an variable file_path to store the path of the selected image
+file_path = ""
 
 
 ##########################################################
@@ -79,7 +83,9 @@ def open_encode_window():
 
         # Button to encode the text inside the image and validate password field
         # Calls a function on separate encode class
-        encode_image_btn = Button(encode_window, text="Encode", width=15)
+        encode_image_btn = Button(encode_window, text="Encode", width=15,
+                                  command=lambda: encode_image(file_path, pass_to_encode.get(),
+                                                               text_to_encode.get("1.0", END)))
         encode_image_btn.config(font=("Open Sans", 15), bg="#503066", fg="white", borderwidth=0)
         encode_image_btn.place(x=592, y=420)
 
@@ -87,6 +93,13 @@ def open_encode_window():
         encode_opened = True
         # assigning a handler to define the actions when the window is tried to close
         encode_window.protocol("WM_DELETE_WINDOW", lambda: close_encode_window(encode_window))
+
+
+# Function to call encode class to handle encoding
+# takes path of the raw image, password and text to be encoded as arguments
+def encode_image(image_path, password, text_to_encode):
+    encode_action = encode.Encode(image_path, password, text_to_encode)
+    encode_action.test()
 
 
 ##########################################################
@@ -149,7 +162,8 @@ def open_decode_window():
 
         # Button to decode the image and validate password field
         # Calls a function on separate decode class
-        decode_stego_btn = Button(decode_window, text="Decode", width=15)
+        decode_stego_btn = Button(decode_window, text="Decode", width=15,
+                                  command=lambda: decode_image(file_path, pass_to_decode.get()))
         decode_stego_btn.config(font=("Open Sans", 15), bg="#36923B", fg="white", borderwidth=0)
         decode_stego_btn.place(x=592, y=420)
 
@@ -159,16 +173,24 @@ def open_decode_window():
         decode_window.protocol("WM_DELETE_WINDOW", lambda: close_decode_window(decode_window))
 
 
+# Function to call decode class to handle decoding
+# takes path of the stego image and password as arguments
+def decode_image(image_path, password):
+    decode_action = decode.Decode(image_path, password)
+    decode_action.test()
+
 ##########################################################
 # COMMON COMPONENTS
 ##########################################################
 # function to open file window to browse image to encode and decode
 def browse_image(image_frame):
-    # Opening the file dialog to allwo user to choose iamge files
-    file_name = filedialog.askopenfilename(title="Choose an Image",
+    # Referencing global variable file_path to store the path of the file
+    global file_path
+    # Opening the file dialog to allow user to choose image files
+    file_path = filedialog.askopenfilename(title="Choose an Image",
                                            filetype=(("Image Files", "*.png"), ("Image Files", "*.jpg")))
     # Getting the path of the selected image
-    selected_image = Image.open(file_name)
+    selected_image = Image.open(file_path)
     # Setting the maximum width of the image to display it on the window
     max_width = 350
     # Calculating the aspect ratio for proportional image resizing
