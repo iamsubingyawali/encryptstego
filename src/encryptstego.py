@@ -9,9 +9,14 @@ from tkinter import filedialog
 
 from PIL import ImageTk, Image
 
-# Defining global variables to track if two child windows for encoding and decoding are in opened or closed state
+# Defining global variables to track if two child windows -
+# for encoding and decoding are in opened or closed state
 encode_opened = False
 decode_opened = False
+# Defining a variable to track if the program is running on Windows OS or not
+# To make all the functionalities to work properly,
+# the value of windows must be set to 'False' for other environments than Windows OS
+windows = True
 
 
 ##########################################################
@@ -33,9 +38,11 @@ def open_encode_window():
         encode_window.resizable(False, False)
         # Setting the window as child of parent so that it appears at front
         encode_window.transient(window)
-        # Setting the encode window to be DPI aware for different screens
-        # windll is Windows OS specific, so must be commented before running on other environments
-        windll.shcore.SetProcessDpiAwareness(1)
+        # Setting the window to be DPI aware for different screens
+        # windll is Windows OS specific
+        # so the value of 'windows' at top must be set to 'False' before running on other environments
+        if windows:
+            windll.shcore.SetProcessDpiAwareness(1)
 
         # Label to display image after the image is selected from the file window
         raw_image_label = Label(encode_window, text="Select Raw Image", height=20, width=50, relief="solid",
@@ -101,9 +108,11 @@ def open_decode_window():
         decode_window.resizable(False, False)
         # Setting the window as child of parent so that it appears at front
         decode_window.transient(window)
-        # Setting the decode window to be DPI aware for different screens
-        # windll is Windows OS specific, so must be commented before running on other environments
-        windll.shcore.SetProcessDpiAwareness(1)
+        # Setting the window to be DPI aware for different screens
+        # windll is Windows OS specific
+        # so the value of 'windows' at top must be set to 'False' before running on other environments
+        if windows:
+            windll.shcore.SetProcessDpiAwareness(1)
 
         # Label to display image after the image is selected from the file window
         stego_image_label = Label(decode_window, text="Select Stego Image", height=20, width=50, relief="solid",
@@ -207,8 +216,10 @@ window.geometry('800x500')
 # Setting the resizable property of the window to false
 window.resizable(False, False)
 # Setting the window to be DPI aware for different screens
-# windll is Windows OS specific, so must be commented before running on other environments
-windll.shcore.SetProcessDpiAwareness(1)
+# windll is Windows OS specific
+# so the value of 'windows' at top must be set to 'False' before running on other environments
+if windows:
+    windll.shcore.SetProcessDpiAwareness(1)
 
 # Getting the logo image for displaying on window as well as title
 logo = Image.open("../images/logo.png")
