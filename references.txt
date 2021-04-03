@@ -1,2 +1,8 @@
 https://icons-for-free.com/gallery+image+landscape+mobile+museum+open+line+icon-1320183049020185924/
 
+https://stackoverflow.com/questions/273946/how-do-i-resize-an-image-using-pil-and-maintain-its-aspect-ratio
+
+https://stackoverflow.com/questions/57869364/how-to-browse-an-image-and-display-it-in-python
+
+https://www.programmersought.com/article/85295249791/
+
