@@ -9,6 +9,7 @@ class Decode:
         self.password = password
 
     # method to check if the supplied password is valid
+    # returns true if the password is valid else returns false
     def is_password_valid(self):
         # checking if the password is empty
         if len(self.password.strip()) == 0:
@@ -16,6 +17,7 @@ class Decode:
         return True
 
     # method to check if the supplied path of the image is valid and image file exists
+    # returns true if the path is valid else returns false
     def is_image_path_valid(self):
         # checking if the image exists on given path
         if os.path.exists(self.image_path):
@@ -23,6 +25,7 @@ class Decode:
         return False
 
     # method to check for all the supplied values and pass the error messages accordingly
+    # returns status and message for validity check
     def are_values_valid(self):
         # calling above methods one by one to check if password and image path are valid
         if not self.is_password_valid():
