@@ -5,7 +5,7 @@
 from tkinter import *
 # windll is Windows OS specific, so must be commented before running on other environments
 from ctypes import windll
-from tkinter import filedialog
+from tkinter import filedialog, messagebox
 import encode
 import decode
 
@@ -99,7 +99,11 @@ def open_encode_window():
 # takes path of the raw image, password and text to be encoded as arguments
 def encode_image(image_path, password, text_to_encode):
     encode_action = encode.Encode(image_path, password, text_to_encode)
-    encode_action.test()
+    msg = encode_action.are_values_valid()
+    if not msg[1]:
+        messagebox.showerror("Error Encoding", msg[0])
+    else:
+        print(msg[0])
 
 
 ##########################################################
@@ -177,7 +181,10 @@ def open_decode_window():
 # takes path of the stego image and password as arguments
 def decode_image(image_path, password):
     decode_action = decode.Decode(image_path, password)
-    decode_action.test()
+    msg = decode_action.are_values_valid()
+    if not msg[1]:
+        messagebox.showerror("Error Decoding", msg[0])
+
 
 ##########################################################
 # COMMON COMPONENTS
@@ -188,7 +195,7 @@ def browse_image(image_frame):
     global file_path
     # Opening the file dialog to allow user to choose image files
     file_path = filedialog.askopenfilename(title="Choose an Image",
-                                           filetype=(("Image Files", "*.png"), ("Image Files", "*.jpg")))
+                                           filetypes=(("Image Files", "*.png"), ("Image Files", "*.jpg")))
     # Getting the path of the selected image
     selected_image = Image.open(file_path)
     # Setting the maximum width of the image to display it on the window
