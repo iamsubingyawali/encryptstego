@@ -1,4 +1,8 @@
+import hashlib
 import os.path
+import sys
+
+from Crypto.Cipher import AES
 
 
 # class Encode to handle encoding activities
@@ -37,11 +41,20 @@ class Encode:
     # method to get binary value of the supplied text to be encoded
     # returns the binary equivalent of the given text
     def get_text_binary(self):
-        # the ord function converts each character of the given text to unicode value
-        # the format function formats it into binary
+        # generating a 32 bytes hex key from the provided password in order to use it as aes secret key
+        secret_key = hashlib.sha1(str(self.password).encode()).hexdigest()[:32]
+        # creating an PyCrypto AES object for encryption
+        encryption_key = AES.new(secret_key.encode('utf-8'), AES.MODE_EAX, secret_key.encode())
+        # generating encrypted text using the AES object and the text to be encoded
+        # returns encrypted bytes
+        encrypted_text = encryption_key.encrypt(self.text_to_encode.encode('utf-8'))
+        # Source:
+        # https://stackoverflow.com/questions/40343414/how-to-convert-binary-string-to-byte-like-object-in-python-3
+        # generating binary value from the encrypted bytes
+        # the format function formats encrypted bytes it into binary bits
         # the join function joins binary value of each character on loop
-        binary_value = ''.join(format(ord(character), '08b') for character in self.text_to_encode)
-        return len(binary_value)
+        binary_value = ''.join('{:08b}'.format(character) for character in bytes(encrypted_text))
+        return binary_value
 
     # method to check for all the supplied values and pass the error messages accordingly
     # returns status and message for validity check
