@@ -1,4 +1,6 @@
+import hashlib
 import os.path
+from Crypto.Cipher import AES
 
 
 # class Decode to handle decoding activities
@@ -23,6 +25,18 @@ class Decode:
         if os.path.exists(self.image_path):
             return True
         return False
+
+    def get_decoded_text(self, binary_value):
+        # generating a 32 bytes hex key from the provided password in order to use it as aes secret key
+        secret_key = hashlib.sha1(str(self.password).encode()).hexdigest()[:32]
+        # creating new PyCrypto AES object to decrypt the converted bytes
+        decryption_key = AES.new(secret_key.encode('utf-8'), AES.MODE_EAX, secret_key.encode())
+        # Source:
+        # https://stackoverflow.com/questions/40343414/how-to-convert-binary-string-to-byte-like-object-in-python-3
+        # converting extracted binary values into bytes
+        bytes_value = bytes([int(binary_value[b:b + 8], 2) for b in range(0, len(binary_value), 8)])
+        # decrypting and returning the extracted text
+        return decryption_key.decrypt(bytes_value).decode('utf-8')
 
     # method to check for all the supplied values and pass the error messages accordingly
     # returns status and message for validity check
