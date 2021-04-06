@@ -6,13 +6,13 @@ class Decode:
     # Parameterized constructor to receive image path and password while object initialization
     def __init__(self, image_path, password):
         self.image_path = image_path
-        self.password = password
+        self.password = password.strip()
 
     # method to check if the supplied password is valid
     # returns true if the password is valid else returns false
     def is_password_valid(self):
         # checking if the password is empty
-        if len(self.password.strip()) == 0:
+        if len(self.password) == 0:
             return False
         return True
 
