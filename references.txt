@@ -7,3 +7,5 @@ https://stackoverflow.com/questions/57869364/how-to-browse-an-image-and-display-
 https://www.programmersought.com/article/85295249791/
 
 https://www.geeksforgeeks.org/python-convert-string-to-binary/
+
+https://stackoverflow.com/questions/40343414/how-to-convert-binary-string-to-byte-like-object-in-python-3
