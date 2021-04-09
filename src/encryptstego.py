@@ -95,15 +95,36 @@ def open_encode_window():
         encode_window.protocol("WM_DELETE_WINDOW", lambda: close_encode_window(encode_window))
 
 
+# method to save the encoded image file on a chosen destination
+def save_image(stego_image):
+    # getting the path of the destination to save
+    save_path = filedialog.asksaveasfile(initialfile="encryptstego.png", mode="wb", defaultextension=".png",
+                                         filetypes=(("Image File", "*.png"), ("All Files", "*.*")))
+    # saving the image
+    stego_image.save(save_path)
+
+
 # Function to call encode class to handle encoding
 # takes path of the raw image, password and text to be encoded as arguments
 def encode_image(image_path, password, text_to_encode):
+    # calling Encode class constructor
     encode_action = encode.Encode(image_path, password, text_to_encode)
+    # calling method inside Encode class to check if all the values are valid
     msg = encode_action.are_values_valid()
+    # checking the status message returned by above function
     if not msg[1]:
+        # showing error if the supplied values are invalid
         messagebox.showerror("Error Encoding", msg[0])
     else:
-        print(msg[0])
+        # calling a method inside Encode class to encode the data into image if all the values are valid
+        stego_image = encode_action.encode_into_image()
+        # checking the returned status message from the function above
+        if stego_image[1]:
+            # calling save_image() function to show the save image dialog and save the output image
+            save_image(stego_image[0])
+        else:
+            # Showing error if any error occurs while encoding the image
+            messagebox.showerror("Error Encoding", stego_image[0])
 
 
 ##########################################################
@@ -195,7 +216,7 @@ def browse_image(image_frame):
     global file_path
     # Opening the file dialog to allow user to choose image files
     file_path = filedialog.askopenfilename(title="Choose an Image",
-                                           filetypes=(("Image Files", "*.png"), ("Image Files", "*.jpg")))
+                                           filetypes=(("Image Files", "*.png"), ("All Files", "*.*")))
     # Getting the path of the selected image
     selected_image = Image.open(file_path)
     # Setting the maximum width of the image to display it on the window
