@@ -6,10 +6,9 @@ from tkinter import *
 # windll is Windows OS specific, so must be commented before running on other environments
 from ctypes import windll
 from tkinter import filedialog, messagebox
+from PIL import ImageTk, Image
 import encode
 import decode
-
-from PIL import ImageTk, Image
 
 # Defining global variables to track if two child windows -
 # for encoding and decoding are in opened or closed state
@@ -121,7 +120,8 @@ def encode_image(image_path, password, text_to_encode):
         # checking the returned status message from the function above
         if stego_image[1]:
             # calling save_image() function to show the save image dialog and save the output image
-            save_image(stego_image[0])
+            if save_image(stego_image[0]) is None:
+                messagebox.showinfo("Image Saved", "Encode operation was successful.")
         else:
             # Showing error if any error occurs while encoding the image
             messagebox.showerror("Error Encoding", stego_image[0])
