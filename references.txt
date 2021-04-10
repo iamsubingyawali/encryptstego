@@ -9,3 +9,7 @@ https://www.programmersought.com/article/85295249791/
 https://www.geeksforgeeks.org/python-convert-string-to-binary/
 
 https://stackoverflow.com/questions/40343414/how-to-convert-binary-string-to-byte-like-object-in-python-3
+
+https://medium.com/swlh/lsb-image-steganography-using-python-2bbbee2c69a2
+
+https://stackoverflow.com/questions/58732272/how-to-convert-bytes-in-a-string-back-to-bytes
