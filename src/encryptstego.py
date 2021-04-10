@@ -222,6 +222,8 @@ def decode_image(image_path, password, text_field):
             text_field.insert(1.0, decoded_text[0])
             # re-disabling the widget to prevent accidental insertion
             text_field.config(state=DISABLED)
+            # showing success message
+            messagebox.showinfo("Text Decoded", "Decode operation was successful.")
         else:
             # showing error message if any error occurs during decoding process
             messagebox.showerror("Error Decoding", decoded_text[0])
