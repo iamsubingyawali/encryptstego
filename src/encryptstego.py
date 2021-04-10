@@ -205,6 +205,12 @@ def decode_image(image_path, password):
     msg = decode_action.are_values_valid()
     if not msg[1]:
         messagebox.showerror("Error Decoding", msg[0])
+    else:
+        decoded_text = decode_action.decode_from_image()
+        if decoded_text[1]:
+            print("The text is: ", decoded_text[0])
+        else:
+            messagebox.showerror("Error Decoding", decoded_text[0])
 
 
 ##########################################################
