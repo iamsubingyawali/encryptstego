@@ -11,10 +11,8 @@ class Encode:
     # password and text to be encoded while object initialization
     def __init__(self, image_path, password, text_to_encode):
         self.image_path = image_path
-        # self.password = password.strip()
-        # self.text_to_encode = text_to_encode.strip()
-        self.password = "hello"
-        self.text_to_encode = "hello"
+        self.password = password.strip()
+        self.text_to_encode = text_to_encode.strip()
 
     # method to check if the supplied password is valid
     # returns true if the password is valid else returns false
@@ -50,12 +48,15 @@ class Encode:
         # generating encrypted text using the AES object and the text to be encoded
         # returns encrypted bytes
         encrypted_text = encryption_key.encrypt(self.text_to_encode.encode('utf-8'))
-        # Source:
-        # https://stackoverflow.com/questions/40343414/how-to-convert-binary-string-to-byte-like-object-in-python-3
-        # generating binary value from the encrypted bytes
-        # the format function formats encrypted bytes it into binary bits
+        # converting encrypted bytes object into string for ease
+        encrypted_text = str(encrypted_text)
+        # appending a delimiter text into the encrypted string to indicate termination of hidden text
+        encrypted_text += "$@&#"
+        # generating binary value from the encrypted string
+        # the ord function converts each character of encrypted string into its unicode equivalent
+        # the format function formats encrypted character's unicode value it into binary bits
         # the join function joins binary value of each character on loop
-        binary_value = ''.join('{:08b}'.format(character) for character in bytes(encrypted_text))
+        binary_value = ''.join([format(ord(character), "08b") for character in encrypted_text])
         return binary_value
 
     # method to hide/encode the encrypted binary data into the image
@@ -77,7 +78,8 @@ class Encode:
         # the returned list is converted to numpy array
         image_array = np.array(list(raw_image.getdata()))
         # getting the size of the image or the total number of all channels in the image
-        image_size = image_array.size
+        # performing the floor division to get the total number of pixels in the image
+        image_size = image_array.size // channels
         # getting the binary data to be encoded
         binary_value = self.get_text_binary()
         # getting the size of the binary data to encode
