@@ -188,7 +188,7 @@ def open_decode_window():
         # Button to decode the image and validate password field
         # Calls a function on separate decode class
         decode_stego_btn = Button(decode_window, text="Decode", width=15,
-                                  command=lambda: decode_image(file_path, pass_to_decode.get()))
+                                  command=lambda: decode_image(file_path, pass_to_decode.get(), text_to_decode))
         decode_stego_btn.config(font=("Open Sans", 15), bg="#36923B", fg="white", borderwidth=0)
         decode_stego_btn.place(x=592, y=420)
 
@@ -200,7 +200,7 @@ def open_decode_window():
 
 # Function to call decode class to handle decoding
 # takes path of the stego image and password as arguments
-def decode_image(image_path, password):
+def decode_image(image_path, password, text_field):
     decode_action = decode.Decode(image_path, password)
     msg = decode_action.are_values_valid()
     if not msg[1]:
@@ -208,7 +208,9 @@ def decode_image(image_path, password):
     else:
         decoded_text = decode_action.decode_from_image()
         if decoded_text[1]:
-            print("The text is: ", decoded_text[0])
+            text_field.config(state=NORMAL)
+            text_field.insert(1.0, decoded_text[0])
+            text_field.config(state=DISABLED)
         else:
             messagebox.showerror("Error Decoding", decoded_text[0])
 
