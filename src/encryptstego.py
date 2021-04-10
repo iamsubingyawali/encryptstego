@@ -199,19 +199,31 @@ def open_decode_window():
 
 
 # Function to call decode class to handle decoding
-# takes path of the stego image and password as arguments
+# takes path of the stego image, password and text field to show decoded text as arguments
 def decode_image(image_path, password, text_field):
+    # calling Decode class constructor
     decode_action = decode.Decode(image_path, password)
+    # calling a method inside Decode class to check if all the supplied arguments are valid
+    # returns status with status message
     msg = decode_action.are_values_valid()
+    # checkin the status of the returned message
     if not msg[1]:
+        # showing error message if the supplied values are not valid
         messagebox.showerror("Error Decoding", msg[0])
     else:
+        # calling method inside Decode class to decode the text inside image
+        # returns text or error message with boolean status value
         decoded_text = decode_action.decode_from_image()
+        # checking status of the message and if message extraction is successful, displaying on the window
         if decoded_text[1]:
+            # enabling the disabled text widget on the decode window
             text_field.config(state=NORMAL)
+            # inserting the decoded text
             text_field.insert(1.0, decoded_text[0])
+            # re-disabling the widget to prevent accidental insertion
             text_field.config(state=DISABLED)
         else:
+            # showing error message if any error occurs during decoding process
             messagebox.showerror("Error Decoding", decoded_text[0])
 
 
