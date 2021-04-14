@@ -75,14 +75,14 @@ def open_encode_window():
 
         # Button to browse for raw image to encode the text inside it
         # Calls a function browse_image() with the label to display the image as argument
-        browse_image_btn = Button(encode_window, text="Browse Raw Image", width=29,
+        browse_image_btn = Button(encode_window, text="Browse Raw Image", width=29, cursor="hand2",
                                   command=lambda: browse_image(raw_image_label))
         browse_image_btn.config(font=("Open Sans", 15), bg="#36923B", fg="white", borderwidth=0)
         browse_image_btn.place(x=20, y=350)
 
         # Button to encode the text inside the image and validate password field
         # Calls a function on separate encode class
-        encode_image_btn = Button(encode_window, text="Encode", width=15,
+        encode_image_btn = Button(encode_window, text="Encode", width=15, cursor="hand2",
                                   command=lambda: encode_image(file_path, pass_to_encode.get(),
                                                                text_to_encode.get("1.0", END)))
         encode_image_btn.config(font=("Open Sans", 15), bg="#503066", fg="white", borderwidth=0)
@@ -180,14 +180,14 @@ def open_decode_window():
 
         # Button to browse for encoded image or stego image to decode
         # Calls a function browse_image() with the label to display the image as argument
-        browse_stego_btn = Button(decode_window, text="Browse Stego Image", width=29,
+        browse_stego_btn = Button(decode_window, text="Browse Stego Image", width=29, cursor="hand2",
                                   command=lambda: browse_image(stego_image_label))
         browse_stego_btn.config(font=("Open Sans", 15), bg="#503066", fg="white", borderwidth=0)
         browse_stego_btn.place(x=20, y=350)
 
         # Button to decode the image and validate password field
         # Calls a function on separate decode class
-        decode_stego_btn = Button(decode_window, text="Decode", width=15,
+        decode_stego_btn = Button(decode_window, text="Decode", width=15, cursor="hand2",
                                   command=lambda: decode_image(file_path, pass_to_decode.get(), text_to_decode))
         decode_stego_btn.config(font=("Open Sans", 15), bg="#36923B", fg="white", borderwidth=0)
         decode_stego_btn.place(x=592, y=420)
@@ -315,7 +315,7 @@ title_label.pack()
 title_label.config(font=("Open Sans", 32))
 
 # Initializing button for encode action
-encode_btn = Button(window, text="Encode", height=2, width=15, bg="#503066", fg="white", borderwidth=0,
+encode_btn = Button(window, text="Encode", height=2, width=15, bg="#503066", fg="white", cursor="hand2", borderwidth=0,
                     command=open_encode_window)
 # Setting font configurations for the button - font family, font size and font weight
 encode_btn.config(font=("Open Sans", 15, "bold"))
@@ -323,7 +323,7 @@ encode_btn.config(font=("Open Sans", 15, "bold"))
 encode_btn.pack(side=LEFT, padx=50)
 
 # Initializing button for the decode button
-decode_btn = Button(window, text="Decode", height=2, width=15, bg="#36923B", fg="white", borderwidth=0,
+decode_btn = Button(window, text="Decode", height=2, width=15, bg="#36923B", fg="white", cursor="hand2", borderwidth=0,
                     command=open_decode_window)
 # Setting font configurations for the button - font family, font size and font weight
 decode_btn.config(font=("Open Sans", 15, "bold"))
