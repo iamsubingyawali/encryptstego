@@ -2,7 +2,7 @@
 <p align="center">
   <img height="150" width="150" src="images/logo.png"/>
 </p>
-<p align="center">Python GUI based application for Image Steganography, with encryption and Key based LSB substitution</p></br>
+<p align="center">Python GUI based application for Image Steganography, with encryption and key based LSB substitution</p></br>
 
 ### `Installation`
 
@@ -16,14 +16,13 @@ git clone https://github.com/iamsubingyawali/encryptstego.git
 
 It is pretty simple to install and run this application on Windows. There are two ways one can can run this app on Windows.
 
-1. Using installer
+<b>Using installer</b>
 
-   Navigate to the cloned folder and inside the "Setup" folder, a windows application installer is available. Run the installer, follow the on-screen instructions and done. You can launch the app      from the start menu.
+Navigate to the cloned folder and inside the "Setup" folder, a windows application installer is available. Run the installer, follow the on-screen instructions and done. You    can launch the app from the start menu.
 
-2. Manual installation
+<b>Manual installation</b>
    
-   The manual installation on Windows is same as the installation on Linux and Mac environments. See Linux/Mac installation section to manually install the app.
-   
+The manual installation on Windows is same as the installation on Linux and Mac environments. See Linux/Mac installation section to manually install the app.   
    
 ### `Installation on Linux/Mac`
 
