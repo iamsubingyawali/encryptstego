@@ -18,7 +18,7 @@ It is pretty simple to install and run this application on Windows. There are tw
 
 <b>Using installer</b>
 
-Navigate to the cloned folder and inside the "Setup" folder, a windows application installer is available. Run the installer, follow the on-screen instructions and done. You    can launch the app from the start menu.
+See the latest app release, a windows application installer is available there. Download and run the installer, follow the on-screen instructions and done. You    can launch the app from the start menu.
 
 <b>Manual installation</b>
    
