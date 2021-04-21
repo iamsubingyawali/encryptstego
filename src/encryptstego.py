@@ -279,10 +279,6 @@ def close_decode_window(decode_window):
     decode_opened = False
 
 
-def about_menu():
-    pass
-
-
 def help_menu():
     pass
 
@@ -345,8 +341,7 @@ footer_label.pack(side=BOTTOM, pady=20)
 
 # Creating a menubar to show menu options
 menu = Menu(window)
-# Adding about and help menus
-menu.add_command(label="About", command=about_menu)
+# Adding help menu
 menu.add_command(label="Help", command=help_menu)
 # displaying menu on the window
 window.config(menu=menu)
