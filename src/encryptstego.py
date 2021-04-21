@@ -11,9 +11,10 @@ import encode
 import decode
 
 # Defining global variables to track if two child windows -
-# for encoding and decoding are in opened or closed state
+# for encoding, decoding and help window are in opened or closed state
 encode_opened = False
 decode_opened = False
+help_opened = False
 # Defining a variable to track if the program is running on Windows OS or not
 # To make all the functionalities to work properly,
 # the value of windows must be set to 'False' for other environments than Windows OS
@@ -269,6 +270,16 @@ def close_encode_window(encode_window):
     encode_opened = False
 
 
+# Function to define actions to be performed when help window is tried to closed
+def close_help_window(help_window):
+    # referencing global variable to reflect modification globally
+    global help_opened
+    # Destroying the passed child help window
+    help_window.destroy()
+    # Setting the value of global tracking variable to false to denote that window is closed
+    help_opened = False
+
+
 # Function to define actions to be performed when decoding window is tried to closed
 def close_decode_window(decode_window):
     # referencing global variable to reflect modification globally
@@ -279,8 +290,52 @@ def close_decode_window(decode_window):
     decode_opened = False
 
 
+# function to show help window when clicked on help menu
 def help_menu():
-    pass
+    # referencing global variable to reflect modification globally
+    global help_opened
+    # checking if the window is already open
+    if not help_opened:
+        # Initializing new child window to brief help options
+        help_window = Toplevel(window)
+        # Setting title of the help window
+        help_window.title("Help")
+        # Setting the size of the help window
+        help_window.geometry('500x420')
+        # Setting the resizable property of the help window to false
+        help_window.resizable(False, False)
+        # Setting the window as child of parent so that it appears at front
+        help_window.transient(window)
+        # Setting the window to be DPI aware for different screens
+        # windll is Windows OS specific
+        # so the value of 'windows' at top must be set to 'False' before running on other environments
+        if windows:
+            windll.shcore.SetProcessDpiAwareness(1)
+
+        # Label to indicate textarea to display title text
+        text_to_decode_label = Label(help_window, text="\nEncryptstego v1.0\nDeveloped by @iamsubingyawali")
+        text_to_decode_label.config(font=("Open Sans", 12))
+        text_to_decode_label.pack()
+
+        # Label to indicate textarea to display help text
+        text_to_decode_label = Label(help_window,
+                                     text="Encryptstego is an Image Steganography tool "
+                                          "used to embed text messages into an Image. The "
+                                          "embedded text is encrypted using the password."
+                                          "\n\nTo encode the message into an image, click on Encode"
+                                          " and select an Image. Choose a password and the text to embed."
+                                          " Then click Encode to embed and save your image with message."
+                                          "\n\nTo decode the message from an encoded image, click Decode and select"
+                                          " the encoded image, provide the password used to encode and click Decode."
+                                          " Your decoded message will be displayed on the window. If the provided "
+                                          "password is incorrect, message can never be extracted.")
+        text_to_decode_label.config(font=("Open Sans", 12),  justify="left", wraplength=450)
+        text_to_decode_label.pack(padx=20, pady=20)
+
+        # Setting the status of help_opened as true to denote that help window is open
+        help_opened = True
+        # assigning a handler to define the actions when the window is tried to close
+        help_window.protocol("WM_DELETE_WINDOW", lambda: close_help_window(help_window))
 
 
 # Initializing tkinter window
