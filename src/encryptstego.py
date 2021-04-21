@@ -279,6 +279,14 @@ def close_decode_window(decode_window):
     decode_opened = False
 
 
+def about_menu():
+    pass
+
+
+def help_menu():
+    pass
+
+
 # Initializing tkinter window
 window = Tk()
 # Setting title of the window
@@ -334,5 +342,14 @@ decode_btn.pack(side=RIGHT, padx=50)
 footer_label = Label(window, text="Subin Gyawali")
 # Packing the label on the window
 footer_label.pack(side=BOTTOM, pady=20)
+
+# Creating a menubar to show menu options
+menu = Menu(window)
+# Adding about and help menus
+menu.add_command(label="About", command=about_menu)
+menu.add_command(label="Help", command=help_menu)
+# displaying menu on the window
+window.config(menu=menu)
+
 # Terminating the execution with mainloop
 window.mainloop()
