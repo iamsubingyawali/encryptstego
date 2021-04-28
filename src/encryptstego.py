@@ -219,6 +219,8 @@ def decode_image(image_path, password, text_field):
         if decoded_text[1]:
             # enabling the disabled text widget on the decode window
             text_field.config(state=NORMAL)
+            # clearing the text field before inserting the decoded text
+            text_field.delete(1.0, END)
             # inserting the decoded text
             text_field.insert(1.0, decoded_text[0])
             # re-disabling the widget to prevent accidental insertion
