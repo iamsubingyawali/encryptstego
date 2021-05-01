@@ -33,7 +33,8 @@ cd encryptstego
 pip install -r requirements.txt
 ```
 
-After all the dependencies are installed, just run the main file using the command below. The program GUI should open.
+After all the dependencies are installed, just run the main file using the command below. But when the application runs, a error may be displayed on Linux or Mac environments. This is because the program was primarily written for Windows OS. So, before running the file, open the **encryptstego.py** file and comment the line **from ctypes import windll** on line 7. Also set the value of **windows** variable to **False** on Line 21. Making these changes, save the file and run the program using command below. The GUI window should open.
+
 
 ```sh
 python encryptstego.py
