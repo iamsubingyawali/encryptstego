@@ -33,7 +33,7 @@ cd encryptstego
 pip install -r requirements.txt
 ```
 
-After all the dependencies are installed, just run the main file using the command below. But when the application runs, a error may be displayed on Linux or Mac environments. This is because the program was primarily written for Windows OS. So, before running the file, open the **encryptstego.py** file and comment the line **from ctypes import windll** on line 7. Also set the value of **windows** variable to **False** on Line 21. Making these changes, save the file and run the program using command below. The GUI window should open.
+After all the dependencies are installed, just run the main file using the command below. But when the application runs, a error may be displayed on Linux or Mac environments (Will be fixed soon). This is because the program was primarily written for Windows OS. So, before running the file, open the **encryptstego.py** file and comment the line **from ctypes import windll** on line 7. Also set the value of **windows** variable to **False** on Line 21. Making these changes, save the file and run the program using command below. The GUI window should open.
 
 
 ```sh
@@ -48,7 +48,11 @@ For encoding, a password must be provided. The password is used to encrypt the t
 
 For decoding, the correct image with encoded text must be used. The password must be correct. Without the correct passwoes, the text can never be extracted from the image.
 
-</br><p><b>Open an issue if any errors occur while using the app. You can also contribute to the project for further enhancements.</b><p></br>
+<p><b>Open an issue if any errors occur while using the app. You can also contribute to the project for further enhancements.</b><p>
+
+### `Known Issues`
+
+Distorted elements in different resolutions due to fixed positioning (Will be fixed soon)</br></br>
 
 <p align="center">Made with ❤ and Python</p>
 
