@@ -22,7 +22,9 @@ See the latest app release, a windows application installer "ensetup.exe" is ava
 
 <b>Manual installation</b>
    
-The manual installation on Windows is same as the installation on Linux and Mac environments. See Linux/Mac installation section to manually install the app.   
+The manual installation on Windows is same as the installation on Linux and Mac environments. See Linux/Mac installation section to manually install the app.
+
+Please note that this application was developed using **Python 3.9**, and it is the recommended version for this application to run. While it may work with newer versions as well, it is not guaranteed.
    
 ### `Installation on Linux/Mac`
 
@@ -46,7 +48,7 @@ This application can be used to embed the text messages into images. The main wi
 
 For encoding, a password must be provided. The password is used to encrypt the text before encoding as well as to dynamically select the pixels to embed the data into.
 
-For decoding, the correct image with encoded text must be used. The password must be correct. Without the correct passwoes, the text can never be extracted from the image.
+For decoding, the correct image with encoded text must be used. The password must be correct. Without the correct password, the text can never be extracted from the image.
 
 <p><b>Open an issue if any errors occur while using the app. You can also contribute to the project for further enhancements.</b><p>
 
